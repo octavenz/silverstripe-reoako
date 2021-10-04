@@ -1,5 +1,5 @@
 {
-    "name": "silverstripe-module/reoako",
+    "name": "octavenz/reoako",
     "description": "A module for Reoako.",
     "type": "silverstripe-vendormodule",
     "keywords": [
@@ -17,17 +17,17 @@
     },
     "autoload": {
         "psr-4": {
-            "SilverStripeModule\\Skeleton\\": "src/",
-            "SilverStripeModule\\Skeleton\\Tests\\": "tests/"
+            "Octavenz\\Reoako\\": "code/"
         }
     },
     "extra": {
-        "branch-alias": {
-            "dev-master": "2.x-dev"
-        },
+        "installer-name": "reoako",
         "expose": [
-            "client/dist"
-        ]
+            "dist"
+        ],
+        "branch-alias": {
+            "dev-master": " 1.x-dev"
+        }
     },
     "minimum-stability": "dev",
     "prefer-stable": true
