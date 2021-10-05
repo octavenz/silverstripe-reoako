@@ -1,0 +1,10 @@
+---
+Name: approutes
+After:
+  - "#rootroutes"
+  - "#coreroutes"
+---
+SilverStripe\Control\Director:
+  rules:
+    "reoako-modal": 'Octavenz\Reoako\Controllers\ReoakoController'
+    'reoako-modal\': 'Octavenz\Reoako\Controllers\ReoakoController'
