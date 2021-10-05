@@ -1,0 +1,29 @@
+SilverStripe\SiteConfig\SiteConfig:
+  extensions:
+    - Octavenz\Reoako\Extensions\ReoakoSiteConfig
+
+# SilverStripe\Admin\LeftAndMain:
+#   extensions:
+#     - Octavenz\Reoako\Extensions\ReoakoLeftAndMainExtension
+#     - Octavenz\Reoako\Extensions\ReoakoEditorExtension
+
+SilverStripe\SiteConfig\SiteConfig:
+  extensions:
+    - Octavenz\Reoako\Extensions\ReoakoSiteConfig
+
+
+SilverStripe\CMS\Model\SiteTree:
+  extensions:
+    - Octavenz\Reoako\Extensions\ReoakoShortCodeExtension
+
+# Adds required tinymce plugin to admin CMS
+SilverStripe\Admin\LeftAndMain:
+  extra_requirements_javascript:
+    - octavenz/reoako:/dist/js/reoako_tinymce_plugin.js
+---
+Name: fuck-proxies
+After: "#cwpcoreconfig"
+---
+CwpInitialisationFilter:
+  egress_proxy_exclude_domains:
+    - api.reoako.nz
