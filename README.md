@@ -10,3 +10,9 @@ set it via one of the following methods:
 
 2.  Octavenz\Reoako\Client\ReokakoClient:
     api_key: <KEY>
+
+### Add reoako to the frontend
+
+Add the following to the base templates where you wish the frontend to be enabled
+
+` <% require javascript('octavenz/reoako:dist/js/reoako-frontend.js') %>`
