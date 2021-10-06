@@ -1,20 +1,10 @@
 import { editorcss } from "./editor.css";
-
-console.log("tinymce plugin loaded");
 // import css from "@octavenz/reoako/dist/reoako.css";
 // import Reoako from "@octavenz/reoako";
 
 // Reoako.init({
 //   apiKey: "b793e22c938d01952a5137b6b463c13e89d22432",
 //   debug: true,
-//   track: (type, detail) => {
-//     // optional. hook into your analytics when events occur
-//     if (typeof detail === "string") {
-//       console.log(type, detail);
-//     } else if ("en" in detail) {
-//       console.log(type, `${detail.en} | ${detail.mi}`);
-//     }
-//   },
 // });
 
 (function () {
@@ -22,20 +12,6 @@ console.log("tinymce plugin loaded");
 
   (function ($) {
     tinymce.PluginManager.add("reoakotranslationdialog", function (editor) {
-      // function createSpan(translationData, currentText) {
-      //   var span;
-
-      //   // Create link
-      //   span = document.createElement("span");
-      //   span.setAttribute("data-reoako-id", translationData.reoruaId);
-      //   span.setAttribute("title", translationData.reoruaHeadword);
-      //   span.appendChild(
-      //     document.createTextNode(translationData.reoruaTranslation)
-      //   );
-
-      //   return span;
-      // }
-
       function showDialog() {
         var url,
           urlParams,
@@ -49,7 +25,7 @@ console.log("tinymce plugin loaded");
         mceSelection = editor.selection;
         $currentNode = $(mceSelection.getEnd());
         // target selected embed (if any)
-        $targetNode = $currentNode.closest("[reoako");
+        $targetNode = $currentNode.closest("reoako");
 
         if ($targetNode.length) {
           currentText = $targetNode.text();
@@ -95,20 +71,81 @@ console.log("tinymce plugin loaded");
 
       const button = editor.addButton("reoakotranslationdialog", {
         icon: "reoako-icon",
-        tooltip: "Insert/edit translation",
+        tooltip: "Reoako translation dialog",
         onclick: showDialog,
-        stateSelector: "[reoako]",
+        stateSelector: "reoako",
       });
 
-      // const menuitem = editor.addMenuItem("reoakotranslationdialog", {
-      //   icon: "reoako-icon",
-      //   text: "Insert/edit translation",
-      //   onclick: showDialog,
-      //   context: "insert",
-      //   prependToContext: true,
-      //   stateSelector: "[reoako]",
-      // });
       editor.addCommand("mceTranslationDialog", showDialog);
+
+      var shortcode_regex =
+        /(\[reoako )(data-reoako-headword=("(?<headword>.*?)")).((data-reoako-id=("(?<id>.*?)")).)(data-reoako-translation=("(?<translation>.*?)"))(])/gi;
+
+      var reoako_regex =
+        /((<reoako )class="reoako-tinymce"((.*?)(>)(.*?))(<\/reoako>))/g;
+
+      function ifShortcode(content) {
+        return content.search(shortcode_regex) !== -1;
+      }
+
+      function replaceShortcodes(content) {
+        console.log("Convert to HTML");
+        const matches = [...content.matchAll(shortcode_regex)];
+        matches.forEach((match) => {
+          // Find all required attributes and rebuild tag
+          console.log(match);
+
+          if ("0" in match) {
+            const str = match["0"];
+            let headword,
+              id,
+              translation = undefined;
+            if (match["groups"]["headword"]) {
+              headword = match["groups"]["headword"];
+            }
+            if (match["groups"]["id"]) {
+              id = match["groups"]["id"];
+            }
+            if (match["groups"]["translation"]) {
+              translation = match["groups"]["translation"];
+            }
+            if (headword && id && translation) {
+              const tag = `<reoako class="reoako-tinymce" data-reoako-headword="${headword}" data-reoako-id="${id}" data-reoako-translation="${translation}">${translation}</reoako>`;
+              console.log(tag);
+              content = content.replace(str, tag);
+            }
+          }
+        });
+        return content;
+      }
+
+      function restoreShortcodes(content) {
+        const matches = [...content.matchAll(reoako_regex)];
+
+        matches.forEach((match) => {
+          console.log("MATCH", match);
+        });
+        // console.log(content);
+
+        return content;
+      }
+
+      editor.on("BeforeSetContent", function (event) {
+        // No shortcodes in content, return.
+        if (!ifShortcode(event.content)) {
+          return;
+        }
+        event.content = replaceShortcodes(event.content);
+      });
+
+      // editor.on("PostProcess", function (event) {
+      //   if (event.get) {
+      //     event.content = restoreShortcodes(event.content);
+      //   }
+      // });
+
+      //   // [reoako headword="September" id="mahuru" translation="Mahuru"]
+      //   // <span data-reoako-headword="September" data-reoako-id="mahuru" data-reoako-translation="Mahuru" class="reoako-trigger" tabindex="0" role="button" title="Show translation" aria-label="Show translation" lang="mi">
     });
     console.log("reoako tinymce plugin loaded");
   })(jQuery);

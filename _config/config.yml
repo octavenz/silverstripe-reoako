@@ -1,29 +1,18 @@
+# Adds the Reokako Settings Tab and API key input
 SilverStripe\SiteConfig\SiteConfig:
   extensions:
     - Octavenz\Reoako\Extensions\ReoakoSiteConfig
-
-# SilverStripe\Admin\LeftAndMain:
-#   extensions:
-#     - Octavenz\Reoako\Extensions\ReoakoLeftAndMainExtension
-#     - Octavenz\Reoako\Extensions\ReoakoEditorExtension
-
-SilverStripe\SiteConfig\SiteConfig:
-  extensions:
-    - Octavenz\Reoako\Extensions\ReoakoSiteConfig
-
 
 SilverStripe\CMS\Model\SiteTree:
   extensions:
+    # Adds the shortcode extension to allow the Reoako Shortcode in content fields
     - Octavenz\Reoako\Extensions\ReoakoShortCodeExtension
 
-# Adds required tinymce plugin to admin CMS
 SilverStripe\Admin\LeftAndMain:
   extra_requirements_javascript:
+    # Adds the required Tinymce plugin to admin CMS
     - octavenz/reoako:/dist/js/reoako_tinymce_plugin.js
----
-Name: fuck-proxies
-After: "#cwpcoreconfig"
----
-CwpInitialisationFilter:
-  egress_proxy_exclude_domains:
-    - api.reoako.nz
+
+SilverStripe\Forms\HTMLEditor\TinyMCEConfig:
+  editor_css:
+    - "octavenz/reoako:dist/css/editor.css"

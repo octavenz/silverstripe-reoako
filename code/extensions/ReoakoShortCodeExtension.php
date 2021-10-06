@@ -15,18 +15,30 @@ class ReoakoShortCodeExtension extends DataExtension
 
     public static function ReoakoShortCode($arguments, $content = null, $parser = null, $tagName = null)
     {
+        $headword = null;
+        $id = null;
+        $translation = null;
 
-        $headword = $arguments["headword"];
-        $id = $arguments["id"];
-        $translation = $arguments["translation"];
+        if (array_key_exists("data-reoako-headword", $arguments)) {
+            $headword =  $arguments["data-reoako-headword"];
+        }
+        if (array_key_exists("data-reoako-id", $arguments)) {
+            $id =  $arguments["data-reoako-id"];
+        }
+        if (array_key_exists("data-reoako-translation", $arguments)) {
+            $translation = $arguments["data-reoako-translation"];
+        }
 
+        if ($headword && $id && $translation) {
+            $constructed_shortcode = '<span ' .
+                'data-reoako-headword="' . $headword . '"' .
+                'data-reoako-id="' . $id . '"' .
+                'data-reoako-translation="' . $translation . '"' .
+                '>' . $translation . '</span>';
 
-        $constructed_shortcode = '<span ' .
-            'data-reoako-headword="' . $headword . '"' .
-            'data-reoako-id="' . $id . '"' .
-            'data-reoako-translation="' . $translation . '"' .
-            'class="reoako-trigger">' . $translation . '</span>';
-
-        return $constructed_shortcode; // [reoako headword="media" mi="hunga-pāpāho"]
+            return $constructed_shortcode;
+        } else {
+            return $content;
+        }
     }
 }

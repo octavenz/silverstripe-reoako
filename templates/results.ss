@@ -1,4 +1,4 @@
-<h3>THERE ARE $count RESULTS FOR "$search_term"</h3>
+<h3>There are $count results for "$search_term"</h3>
 
 <table class="table grid-field__table">
     <thead>
@@ -34,8 +34,6 @@
 </table>
 
 <script type="text/javascript">
-    console.log("reoako modal js loaded");
-
     //Hacky iframe parent JQuery js
     var $ = window.parent.jQuery;
     var reoakoInstance = window.parent._reoako;
@@ -44,25 +42,27 @@
         var editor = reoakoInstance.features.editor;
 
         $(".choose-word", document).on("click", (e) => {
-            console.log(e.currentTarget);
+            // console.log(e.currentTarget);
 
             var translation = e.currentTarget.getAttribute(
                 "data-reoako-translation"
             );
             var id = e.currentTarget.getAttribute("data-reoako-id");
             var headword = e.currentTarget.getAttribute("data-reoako-headword");
-
             var word = e.currentTarget.getAttribute("data-reoako-translation");
 
+            console.log([translation, id, headword, word]);
+
             let constructed_shortcode =
-                '[reoako headword="' +
+                '[reoako data-reoako-headword="' +
                 headword +
-                '" id="' +
+                '" data-reoako-id="' +
                 id +
-                '" translation="' +
+                '" data-reoako-translation="' +
                 translation +
                 '"]';
 
+            console.log(constructed_shortcode);
             editor.insertContent(constructed_shortcode);
             reoakoInstance.close();
         });

@@ -11,3 +11,7 @@
     display: block;
     padding-top: 100%;
 }
+
+b.reoako-tinymce {
+    text-decoration: underline !important;
+}
