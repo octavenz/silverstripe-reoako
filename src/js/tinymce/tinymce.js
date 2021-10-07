@@ -1,16 +1,13 @@
 import { editorcss } from "./editor.css";
-// import css from "@octavenz/reoako/dist/reoako.css";
-// import Reoako from "@octavenz/reoako";
-
-// Reoako.init({
-//   apiKey: "b793e22c938d01952a5137b6b463c13e89d22432",
-//   debug: true,
-// });
 
 (function () {
   "use strict";
 
   (function ($) {
+    if (typeof tinymce === "undefined") {
+      return;
+    }
+
     tinymce.PluginManager.add("reoakotranslationdialog", function (editor) {
       function showDialog() {
         var url,
@@ -82,19 +79,16 @@ import { editorcss } from "./editor.css";
         /(\[reoako )(data-reoako-headword=("(?<headword>.*?)")).((data-reoako-id=("(?<id>.*?)")).)(data-reoako-translation=("(?<translation>.*?)"))(])/gi;
 
       var reoako_regex =
-        /((<reoako )class="reoako-tinymce"((.*?)(>)(.*?))(<\/reoako>))/g;
+        /((\<reoako ((class="(.*?)").*?(data-reoako-headword="(?<headword>.*?)").*?(data-reoako-id="(?<id>.*?)").*?(data-reoako-translation="(?<translation>.*?)").*?)>)(.*?)(<\/reoako>))/g;
 
       function ifShortcode(content) {
         return content.search(shortcode_regex) !== -1;
       }
 
       function replaceShortcodes(content) {
-        console.log("Convert to HTML");
         const matches = [...content.matchAll(shortcode_regex)];
         matches.forEach((match) => {
           // Find all required attributes and rebuild tag
-          console.log(match);
-
           if ("0" in match) {
             const str = match["0"];
             let headword,
@@ -110,8 +104,7 @@ import { editorcss } from "./editor.css";
               translation = match["groups"]["translation"];
             }
             if (headword && id && translation) {
-              const tag = `<reoako class="reoako-tinymce" data-reoako-headword="${headword}" data-reoako-id="${id}" data-reoako-translation="${translation}">${translation}</reoako>`;
-              console.log(tag);
+              const tag = ` <reoako class="reoako-tinymce" data-reoako-headword="${headword}" data-reoako-id="${id}" data-reoako-translation="${translation}">${translation}</reoako> `;
               content = content.replace(str, tag);
             }
           }
@@ -123,10 +116,26 @@ import { editorcss } from "./editor.css";
         const matches = [...content.matchAll(reoako_regex)];
 
         matches.forEach((match) => {
-          console.log("MATCH", match);
+          if ("0" in match) {
+            const str = match["0"];
+            let headword,
+              id,
+              translation = undefined;
+            if (match["groups"]["headword"]) {
+              headword = match["groups"]["headword"];
+            }
+            if (match["groups"]["id"]) {
+              id = match["groups"]["id"];
+            }
+            if (match["groups"]["translation"]) {
+              translation = match["groups"]["translation"];
+            }
+            if (headword && id && translation) {
+              const tag = ` [reoako data-reoako-headword="${headword}" data-reoako-id="${id}" data-reoako-translation="${translation}"]`;
+              content = content.replace(str, tag);
+            }
+          }
         });
-        // console.log(content);
-
         return content;
       }
 
@@ -138,15 +147,14 @@ import { editorcss } from "./editor.css";
         event.content = replaceShortcodes(event.content);
       });
 
-      // editor.on("PostProcess", function (event) {
-      //   if (event.get) {
-      //     event.content = restoreShortcodes(event.content);
-      //   }
-      // });
+      editor.on("PostProcess", function (event) {
+        if (event.get) {
+          event.content = restoreShortcodes(event.content);
+        }
+      });
 
       //   // [reoako headword="September" id="mahuru" translation="Mahuru"]
       //   // <span data-reoako-headword="September" data-reoako-id="mahuru" data-reoako-translation="Mahuru" class="reoako-trigger" tabindex="0" role="button" title="Show translation" aria-label="Show translation" lang="mi">
     });
-    console.log("reoako tinymce plugin loaded");
   })(jQuery);
 }.call(this));

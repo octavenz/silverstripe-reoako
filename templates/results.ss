@@ -54,13 +54,13 @@
             console.log([translation, id, headword, word]);
 
             let constructed_shortcode =
-                '[reoako data-reoako-headword="' +
+                ' [reoako data-reoako-headword="' +
                 headword +
                 '" data-reoako-id="' +
                 id +
                 '" data-reoako-translation="' +
                 translation +
-                '"]';
+                '"] ';
 
             console.log(constructed_shortcode);
             editor.insertContent(constructed_shortcode);
