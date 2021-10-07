@@ -7,11 +7,13 @@ SilverStripe\CMS\Model\SiteTree:
   extensions:
     # Adds the shortcode extension to allow the Reoako Shortcode in content fields
     - Octavenz\Reoako\Extensions\ReoakoShortCodeExtension
+    # Injects the frontend javascript Reoako lib
+    - Octavenz\Reoako\Extensions\ReoakoFrontendExtension
 
 SilverStripe\Admin\LeftAndMain:
   extra_requirements_javascript:
     # Adds the required Tinymce plugin to admin CMS
-    - octavenz/reoako:/dist/js/reoako_tinymce_plugin.js
+    - octavenz/reoako:/dist/js/reoako-tinymce-plugin.js
 
 SilverStripe\Forms\HTMLEditor\TinyMCEConfig:
   editor_css:

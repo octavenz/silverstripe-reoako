@@ -3,10 +3,6 @@
     type="text/css"
     href="/resources/vendor/silverstripe/admin/client/dist/styles/bundle.css"
 />
-<script
-    type="application/javascript"
-    src="/resources/vendor/octavenz/reoako/dist/js/reoako-modal.js") 
-></script>
 
 <div class="modal-content">
     <div class="asset-admin">

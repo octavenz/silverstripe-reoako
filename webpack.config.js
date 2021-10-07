@@ -5,10 +5,8 @@ const outputPath = path.resolve(__dirname, "dist");
 
 module.exports = {
   entry: {
-    "js/reoako_tinymce_plugin": path.join(entryPath, "tinymce/tinymce.js"),
+    "js/reoako-tinymce-plugin": path.join(entryPath, "tinymce/tinymce.js"),
     "js/reoako-frontend": path.join(entryPath, "frontend/frontend.js"),
-    "js/reoako-admin": path.join(entryPath, "admin/admin.js"),
-    "js/reoako-modal": path.join(entryPath, "modal/modal.js"),
   },
   output: {
     path: outputPath,

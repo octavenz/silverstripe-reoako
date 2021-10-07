@@ -27,8 +27,7 @@ class ReoakoController extends Controller
 
     public function search($request)
     {
-
-        Requirements::javascript("octavenz/reoako:dist/js/reoako-admin.js");
+        Requirements::css("silverstripe/admin:client/dist/styles/bundle.css");
         $rc = new ReoakoClient();
         $vars = $request->getVars();
 

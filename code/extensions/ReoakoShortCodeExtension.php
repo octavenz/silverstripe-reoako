@@ -4,8 +4,6 @@ namespace Octavenz\Reoako\Extensions;
 
 use SilverStripe\ORM\DataExtension;
 
-
-
 class ReoakoShortCodeExtension extends DataExtension
 {
 

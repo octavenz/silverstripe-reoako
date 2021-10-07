@@ -1,5 +1,9 @@
 # Note: vendor expose is not working in dev!
 
+## Installation
+
+$ composer require octavenz/reoako
+
 to set you reoako api key
 set it via one of the following methods:
 

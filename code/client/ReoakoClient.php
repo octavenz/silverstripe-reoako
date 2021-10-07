@@ -8,6 +8,7 @@ use SilverStripe\Core\Environment;
 use GuzzleHttp\Client;
 use GuzzleHttp\Exception\ServerException;
 use GuzzleHttp\Exception\ClientException;
+use SilverStripe\Control\Director;
 
 class ReoakoClient
 {
@@ -79,19 +80,8 @@ class ReoakoClient
     {
         $this->apiKey = $this->getApiKey();
         $this->domain = self::$default_api_domain;
-        $this->origin = 'http://localhost'; //$this->get_base_url($referer);
+        $this->origin = Director::baseURL();
         $this->endpoint = $this->domain . '/' . self::$default_api_base_path;
-    }
-
-    protected function get_base_url($url)
-    {
-        // $parts = urllib . parse . urlparse($url);
-        // return '{parts.scheme}://{parts.netloc}';
-    }
-
-    protected function build_path($path)
-    {
-        // return '{self.domain}/{self.base_path}/{path}';
     }
 
 
