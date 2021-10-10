@@ -1,3 +1,5 @@
+# [<a src="https://www.reoako.nz/">Reoako</a>]
+
 ![Reoako Preview](docs/img/screen5.png)
 
 ## Requirements
@@ -6,79 +8,159 @@
 -   Composer
 -   Reoako API key
 
-## Installation
-
-$ composer require octavenz/reoako
 
 ## Components
 
-0. TinyMCE plugin
-1. Reoako Client
-2. Reoako Modal window
+The Reoako silverstripe intergration consists of 5 components.
 
-## Cofiguration
+#### Reoako PHP client
 
-Depending on your setup you will need to apply some extensions:
+Used to authenticate and request translations from the Reoako API.
 
-`
+#### TinyMCE plugin
 
-# Apply the site config extension to add a reoako api key field in the site settings
+Allows content editors to search and insert translations into richfields via TinyMCE.
 
-SilverStripe\SiteConfig\SiteConfig:
-extensions:
+#### Reoako Silverstripe settings tab (optional)
 
--   Octavenz\Reoako\Extensions\ReoakoSiteConfig
+Allows a site admin to set the api key via the settings tab.
 
-`
+If this extension is not enabled you will need to set the API key via yml or .env
 
-`
 
-# Adds the shortcode extension to allow the Reoako Shortcode in content fields
+#### Reoako frontend extension (optional)
 
+Enabled by applying an extension to sitetree which will inject the Reoako javascript+css to all frontend views.
+
+If this extension is not enabled you will need to include the Reaoko frontend package via your own build process
+
+https://www.npmjs.com/package/@octavenz/reoako
+
+
+## Installation
+
+(While in Beta - please use the private bitbucket link)
+
+- `$ composer config repositories.repo-name vcs https://bitbucket.org/kernldigital/silverstripe-reoako`
+
+- `$ composer require octavenz/reoako:0.1.0`
+
+
+
+
+## Configuration
+
+Depending on your setup you will need to apply some extensions
+
+
+## Required extensions and config
+
+#### Shortcode extension
+
+Adds the shortcode extension to allow the Reoako Shortcode in be used in content fields
+
+
+```
 SilverStripe\CMS\Model\SiteTree:
-extensions:
+  extensions:
+    - Octavenz\Reoako\Extensions\ReoakoShortCodeExtension
+```
 
--   Octavenz\Reoako\Extensions\ReoakoShortCodeExtension
-    ` `
+#### Tinymce
 
-# Injects the Reoako javascript and css to the content controller - pulls the api key from the backend
+Adds the Reoako Tinymce plugin to richfields via in the CMS
 
-SilverStripe\CMS\Model\SiteTree:
-extensions:
 
--   Octavenz\Reoako\Extensions\ReoakoFrontendExtension
-    ` `
-
-# Adds the required Tinymce plugin to admin CMS
-
+```
 SilverStripe\Admin\LeftAndMain:
-extra_requirements_javascript: - octavenz/reoako:/dist/js/reoako-tinymce-plugin.js
+  extra_requirements_javascript: 
+    - octavenz/reoako:/dist/js/reoako-tinymce-plugin.js
+```
 
-# Adds the some css to the tinyMCE editor window to highlight reoako tags
 
+#### Tinymce CSS 
+
+Adds css to the tinyMCE editor window to highlight reoako tags
+
+
+```
 SilverStripe\Forms\HTMLEditor\TinyMCEConfig:
-editor_css: - "octavenz/reoako:dist/css/editor.css"
-`
+  editor_css: 
+    - "octavenz/reoako:dist/css/editor.css"
+```
 
-## Set your API key
 
-Get your api key from ?Octave?
 
-Set you reoako api key via one of the following methods:
+## Optional extensions and config
 
-0.  SS_REOAKO_API_KEY = <KEY>
-    in .env or via envrionment varaibles
+#### Site config
 
-1.  Set your Reoako API Key via the settings panel
-    navigate to: /admin/settings/#Root_Reoako
+Apply the site config extension to add a reoako api key field in the site settings
 
-2.  Set you key via yml in your config
+Add the following to your config/site.yml
 
+
+```
+SilverStripe\SiteConfig\SiteConfig:
+  extensions:
+    - Octavenz\Reoako\Extensions\ReoakoSiteConfig
+```
+
+
+#### Reoako frontend extension 
+
+Injects the required Reoako frontend javascript and css to all frontend pages
+
+Add the following to your config/site.yml
+
+
+```
+SilverStripe\CMS\Model\SiteTree:
+  extensions:
+    - Octavenz\Reoako\Extensions\ReoakoFrontendExtension
+```
+ 
+ 
+
+
+## Setting your API key
+
+A Reoako API key is required 
+
+Set it via one of the following methods:
+
+### .env
+
+Set your api key in your .env file or via your environment variable
+
+
+```
+SS_REOAKO_API_KEY = <KEY>
+
+```
+
+
+### Settings panel
+
+Navigate to: /admin/settings/#Root_Reoako
+
+set your API key in the field.
+
+
+### YML 
+
+Set you key via yml in your config
+
+
+```
 Octavenz\Reoako\Client\ReokakoClient:
-api_key: <KEY>
+  api_key: <KEY>
+```
 
-### Frontend
 
-The reoako javascript and css needs to be included in your frontend.
 
-Add the following to the base templates where you wish the frontend to be enabled
+### TODO:
+- Subsite support
+- Bitbucket pipeline tests
+- SS4/CWP tests
+
