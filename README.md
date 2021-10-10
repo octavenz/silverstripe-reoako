@@ -1,4 +1,4 @@
-[[/docs/img/screen5.png|Silverstripe Reoako package]]
+[<img src="/docs/img/screen5.png">](Silverstripe Reoako package)
 
 ## Requirements
 
