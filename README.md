@@ -11,7 +11,7 @@
 
 ## Components
 
-The Reoako silverstripe intergration consists of 5 components.
+The Reoako silverstripe intergration consists of 4 components.
 
 #### Reoako PHP client
 
@@ -46,11 +46,12 @@ https://www.npmjs.com/package/@octavenz/reoako
 - `$ composer require octavenz/reoako:0.1.0`
 
 
-
-
 ## Configuration
 
 Depending on your setup you will need to apply some extensions
+
+> #### You will need to build and flush after adding the extensions
+
 
 
 ## Required extensions and config
