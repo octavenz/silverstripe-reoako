@@ -1,7 +1,7 @@
 {
   "name": "silverstripe-reoako",
   "version": "0.1.0",
-  "repository": "https://bitbucket.org/kernldigital/silverstripe-reoako",
+  "repository": "https://github.com/octavenz/silverstripe-reoako",
   "private": true,
   "engines": {
     "node": "14"
