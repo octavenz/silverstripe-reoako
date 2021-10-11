@@ -55,7 +55,12 @@ class ReoakoClient
             return $this->apiKey;
         }
 
-        // Check config for a value defined in YAML or _config.php
+        // Check environment as override
+        if ($envApiKey = Environment::getEnv('SS_REOAKO_API_KEY')) {
+            return $envApiKey;
+        }
+
+        // Check config for a value defined in YAML
         $key = Config::inst()->get(ReokakoClient::class, 'api_key');
         if (!empty($key)) {
             return $key;
@@ -67,11 +72,6 @@ class ReoakoClient
             return $key;
         }
 
-        // Check environment as last resort
-        if ($envApiKey = Environment::getEnv('SS_REOAKO_API_KEY')) {
-            return $envApiKey;
-        }
-
         return '';
     }
 
@@ -80,10 +80,9 @@ class ReoakoClient
     {
         $this->apiKey = $this->getApiKey();
         $this->domain = self::$default_api_domain;
-        $this->origin = Director::baseURL();
+        $this->origin = Director::protocolAndHost();
         $this->endpoint = $this->domain . '/' . self::$default_api_base_path;
     }
-
 
     function search($term)
     {
@@ -92,7 +91,7 @@ class ReoakoClient
         $headers = array(
             'Content-Type' => 'application/json',
             'Authorization' =>  'Token ' . $this->apiKey,
-            'Origin' => 'http://localhost',
+            'Origin' => $this->origin,
             'Accept' => 'application/json',
         );
 
@@ -101,11 +100,10 @@ class ReoakoClient
 
         try {
             $response = $client->get(
-                'https://api.reoako.nz/api/v1/entries/?search=' . $term,
+                $this->endpoint . '/entries/?search=' . $term,
                 ['headers' => $headers]
             );
 
-            // setup exception handling
             $json = json_decode($response->getBody(), true);
             return $json;
         } catch (ClientException $error) {
