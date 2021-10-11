@@ -46,13 +46,9 @@ https://www.npmjs.com/package/@octavenz/reoako
 
 ## Installation
 
-(While in Beta - please use the private bitbucket link)
+1. `$ composer require octavenz/reoako:0.1.0`
 
-1. `$ composer config repositories.repo-name vcs https://bitbucket.org/kernldigital/silverstripe-reoako.git`
-
-2. `$ composer require octavenz/reoako:dev-feat/init-development`
-
-3. `dev build and flush`
+2. `dev build and flush`
 
 ## Extensions and Configuration
 
