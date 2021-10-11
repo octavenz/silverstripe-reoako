@@ -88,15 +88,16 @@ class ReoakoClient
     {
         $client = new Client();
 
+        if (empty($this->apiKey)) {
+            throw new \Exception("API key not set");
+        }
+
         $headers = array(
             'Content-Type' => 'application/json',
             'Authorization' =>  'Token ' . $this->apiKey,
             'Origin' => $this->origin,
             'Accept' => 'application/json',
         );
-
-        // TODO: setup exception handling
-        $client = new Client();
 
         try {
             $response = $client->get(
