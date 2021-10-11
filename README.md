@@ -159,6 +159,7 @@ When you have found a word you wish to insert, click on its title to insert the 
 ### TODO:
 
 -   Ajax search on character entry
+-   API key config from env/yml/field
 -   Subsite support
 -   Bitbucket pipeline tests
 -   SS4/CWP tests
