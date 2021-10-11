@@ -1,0 +1,123 @@
+<?php
+
+namespace Octavenz\Reoako\Client;
+
+use Silverstripe\SiteConfig\SiteConfig;
+use SilverStripe\Core\Config\Config;
+use SilverStripe\Core\Environment;
+use GuzzleHttp\Client;
+use GuzzleHttp\Exception\ServerException;
+use GuzzleHttp\Exception\ClientException;
+use SilverStripe\Control\Director;
+
+class ReoakoClient
+{
+    /**
+     * API Domain
+     *
+     * @var string
+     * @config
+     */
+    private static $default_api_domain = 'https://api.reoako.nz';
+    /**
+     *  API base path
+     *
+     * @var string
+     * @config
+     */
+    private static $default_api_base_path = 'api/v1';
+
+    /**
+     *  API key
+     *
+     * @var string
+     * @config
+     */
+    private static $api_key = '';
+
+    /**
+     * The API key that will be used for the service. Can be set on the singleton to take priority over configuration.
+     *
+     * @var string
+     */
+    protected $apiKey = '';
+
+    /**
+     * Get the API key. Priority is given first to explicitly set values on a singleton, then to configuration values
+     * and finally to environment values.
+     *
+     * @return string
+     */
+    public function getApiKey()
+    {
+        // Priority given to explicitly set API keys on the singleton object
+        if ($this->apiKey) {
+            return $this->apiKey;
+        }
+
+        // Check environment as override
+        if ($envApiKey = Environment::getEnv('SS_REOAKO_API_KEY')) {
+            return $envApiKey;
+        }
+
+        // Check config for a value defined in YAML
+        $key = Config::inst()->get(ReokakoClient::class, 'api_key');
+        if (!empty($key)) {
+            return $key;
+        }
+
+        // Check in the site config for the ReoakoAPI key
+        $key = SiteConfig::current_site_config()->ReoakoAPI;
+        if (!empty($key)) {
+            return $key;
+        }
+
+        return '';
+    }
+
+
+    public function __construct()
+    {
+        $this->apiKey = $this->getApiKey();
+        $this->domain = self::$default_api_domain;
+        $this->origin = Director::protocolAndHost();
+        $this->endpoint = $this->domain . '/' . self::$default_api_base_path;
+    }
+
+    function search($term)
+    {
+        $client = new Client();
+
+        $headers = array(
+            'Content-Type' => 'application/json',
+            'Authorization' =>  'Token ' . $this->apiKey,
+            'Origin' => $this->origin,
+            'Accept' => 'application/json',
+        );
+
+        // TODO: setup exception handling
+        $client = new Client();
+
+        try {
+            $response = $client->get(
+                $this->endpoint . '/entries/?search=' . $term,
+                ['headers' => $headers]
+            );
+
+            $json = json_decode($response->getBody(), true);
+            return $json;
+        } catch (ClientException $error) {
+            // Get the original response
+            $response = $error->getResponse();
+            // Get the info returned from the remote server.
+            $response_info = $response->getBody();
+            return $response_info;
+        } catch (ServerException $error) {
+            // Get the original response
+            $response = $error->getResponse();
+            // Get the info returned from the remote server.
+            $response_info = $response->getBody()->getContents();
+            return $response_info;
+        }
+    }
+}

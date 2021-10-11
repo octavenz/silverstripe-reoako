@@ -1,106 +1,175 @@
-# SilverStripe supported module skeleton
+# <a src="https://www.reoako.nz/">Reoako</a>
 
-A useful skeleton to more easily create a [Silverstripe Module](https://docs.silverstripe.org/en/4/developer_guides/extending/modules/) that conform to the
-[Module Standard](https://docs.silverstripe.org/en/developer_guides/extending/modules/#module-standard).
+The Reoako silverstripe CMS package helps content managers to embrace the
+use of our national language in Aotearoa. Use te reo Māori correctly, in the right context, and support your readers with word definitions and pronunciation.
 
-This readme contains descriptions of the parts of this module base you should customise to meet you own module needs.
-For example, the module name in the H1 above should be you own module name, and the description text you are reading now
-is where you should provide a good short explanation of what your module does.
-
-Where possible we have included default text that can be included as is into your module and indicated in 
-other places where you need to customise it
-
-Below is a template of the sections of your readme.md you should ideally include to met the Module Standard 
-and help others make use of your modules.
-
-### Steps to prepare this module for your own use:
-
-- Clone this repository into a folder
-- Add your name/organisation to `LICENSE.md`
-- Update this readme with information about your module. Ensure sections that aren't relevant are deleted and 
-placeholders are edited where relevant
-- Review the README files in the various provided directories. You should replace these with `.gitkeep` or delete the 
-directories
-- Update the module's `composer.json` with your requirements and package name
-- Update (or remove) `package.json` with your requirements and package name. Run `yarn` (or remove `yarn.lock`) to 
-ensure dependencies resolve correctly
-- Clear the git history by running `rm -rf .git && git init`
-- Add and push to a VCS repository
-- Either [publish](https://getcomposer.org/doc/02-libraries.md#publishing-to-packagist) the module on packagist.org, or add a [custom repository](https://getcomposer.org/doc/02-libraries.md#publishing-to-a-vcs) to your main `composer.json`
-- Require the module in your main `composer.json`
-- Start developing your module!
+![Reoako Preview](docs/img/screen5.png)
 
 ## Requirements
 
-* SilverStripe ^4.0
-* [Yarn](https://yarnpkg.com/lang/en/), [NodeJS](https://nodejs.org/en/) (6.x) and [npm](https://npmjs.com) (for building
-  frontend assets)
-* Other module
-* Other server requirement
-* Etc
+-   Silverstripe 4.X
+-   Composer
+-   Reoako API key - <a src="https://www.reoako.nz/">Register here for more info </a>
+
+### Tested on
+
+-   CWP recipe 2.8
+-   Silverstripe 4.8
+-   PHP 7.4
+
+## Components
+
+The Reoako silverstripe package consists of 4 components.
+.
+
+#### TinyMCE plugin
+
+Allows content editors to search and insert translations into richfields via TinyMCE.
+
+#### Reoako PHP client
+
+Used to authenticate and make requests to the Reoako API for translations by the TinyMCE plugin
+
+#### Reoako Silverstripe settings tab (optional)
+
+Allows a site admin to set the api key via the settings tab.
+
+> If this extension is not applied you will need to set the API key via yml or .env - see below
+
+#### Reoako frontend extension (optional)
+
+Injects the Reoako javascript and css bundles to all frontend views.
+
+> If this extension is not applied you will need to include the Reaoko frontend package via your own theme build process
+
+https://www.npmjs.com/package/@octavenz/reoako
 
 ## Installation
-Add some installation instructions here, having a 1 line composer copy and paste is useful. 
-Here is a composer command to create a new module project. Ensure you read the
-['publishing a module'](https://docs.silverstripe.org/en/developer_guides/extending/how_tos/publish_a_module/) guide
-and update your module's composer.json to designate your code as a SilverStripe module. 
+
+(While in Beta - please use the private bitbucket link)
+
+1. `$ composer config repositories.repo-name vcs https://bitbucket.org/kernldigital/silverstripe-reoako.git`
+
+2. `$ composer require octavenz/reoako:dev-feat/init-development`
+
+3. `dev build and flush`
+
+## Extensions and Configuration
+
+Depending on your setup you will need to apply some extensions
+
+To apply the extensions create a config/reoako.yml file in your codebase and copy the following examples into it.
+
+> You will need to flush after adding the extensions
+
+### Required extensions
+
+#### Shortcode extension
+
+Adds the shortcode extension to allow the Reoako Shortcode in be used in content fields
 
 ```
-composer require silverstripe-module/skeleton 4.x-dev
+SilverStripe\CMS\Model\SiteTree:
+  extensions:
+    - Octavenz\Reoako\Extensions\ReoakoShortCodeExtension
 ```
 
-**Note:** When you have completed your module, submit it to Packagist or add it as a VCS repository to your
-project's composer.json, pointing to the private repository URL.
+#### Tinymce extension
 
-## License
-See [License](license.md)
+Adds the Reoako Tinymce plugin to richfields
 
-We have included a 3-clause BSD license you can use as a default. We advocate for the BSD license as 
-it is one of the most permissive and open licenses.
-
-Feel free to alter the [license.md](license.md) to suit if you wan to use an alternative license.
-You can use [choosealicense.com](http://choosealicense.com) to help pick a suitable license for your project.
-
-## Documentation
- * [Documentation readme](docs/en/readme.md)
-
-Add links into your docs/<language> folder here unless your module only requires minimal documentation 
-in that case, add here and remove the docs folder. You might use this as a quick table of content if you
-mhave multiple documentation pages.
-
-## Example configuration (optional)
-If your module makes use of the config API in SilverStripe it's a good idea to provide an example config
- here that will get the module working out of the box and expose the user to the possible configuration options.
-
-Provide a yaml code example where possible.
-
-```yaml
-
-Page:
-  config_option: true
-  another_config:
-    - item1
-    - item2
-  
+```
+SilverStripe\Admin\LeftAndMain:
+  extensions:
+    - Octavenz\Reoako\Extensions\ReoakoTinymceExtension
 ```
 
-## Maintainers
- * Person here <person@emailaddress.com>
- * Another maintainer <maintain@emailaddress.com>
- 
-## Bugtracker
-Bugs are tracked in the issues section of this repository. Before submitting an issue please read over 
-existing issues to ensure yours is unique. 
- 
-If the issue does look like a new bug:
- 
- - Create a new issue
- - Describe the steps required to reproduce your issue, and the expected outcome. Unit tests, screenshots 
- and screencasts can help here.
- - Describe your environment as detailed as possible: SilverStripe version, Browser, PHP version, 
- Operating System, any installed SilverStripe modules.
- 
-Please report security issues to the module maintainers directly. Please don't file security issues in the bugtracker.
- 
-## Development and contribution
-If you would like to make contributions to the module please ensure you raise a pull request and discuss with the module maintainers.
+#### Tinymce CSS injection
+
+Adds css to the TinyMCE editor iframe to allow for highlighting of reoako tags
+
+```
+SilverStripe\Forms\HTMLEditor\TinyMCEConfig:
+  editor_css:
+    - "octavenz/reoako:dist/css/editor.css"
+```
+
+## Optional extensions
+
+#### Site config
+
+Adds a tab and field in thesite config to allow an admin to set the Reoako API key
+
+```
+SilverStripe\SiteConfig\SiteConfig:
+  extensions:
+    - Octavenz\Reoako\Extensions\ReoakoSiteConfig
+```
+
+#### Reoako frontend extension
+
+Injects the required Reoako frontend javascript and css to all frontend pages
+
+```
+SilverStripe\CMS\Model\SiteTree:
+  extensions:
+    - Octavenz\Reoako\Extensions\ReoakoFrontendExtension
+```
+
+## Setting your API key
+
+A Reoako API key is required
+
+Set it via one of the following methods:
+
+### .env
+
+Set your api key in your .env file or via your environment variable
+
+```
+SS_REOAKO_API_KEY = <KEY>
+
+```
+
+### Settings panel
+
+Navigate to: /admin/settings/#Root_Reoako
+
+set your API key in the field.
+
+### YML
+
+Set you key via yml in your config
+
+```
+Octavenz\Reoako\Client\ReokakoClient:
+  api_key: <KEY>
+```
+
+## Using the TinyMCE plugin
+
+When the Reoako plugin is enabled in TinyMCE, you will notice a new Reoako button.
+
+![Reoako Preview](docs/img/screen0.png)
+
+You can press the Reoako button when text is selected to perform a search for the selected word.
+
+![Reoako Preview](docs/img/screen6.png)
+
+If no text is selected when pressing the Reoako button, you will be prompted to enter a word to search for.
+
+![Reoako Preview](docs/img/screen1.png)
+
+![Reoako Preview](docs/img/screen3.png)
+
+When you have found a word you wish to insert, click on its title to insert the Reoako shortcode into the editor
+
+![Reoako Preview](docs/img/screen4.png)
+
+### TODO:
+
+-   Ajax search on character entry
+-   Subsite support
+-   Bitbucket pipeline tests
+-   SS4/CWP tests
+-   Elemental block support

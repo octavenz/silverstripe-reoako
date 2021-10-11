@@ -1,73 +1,43 @@
 {
-  "name": "silverstripe-module-skeleton",
-  "description": "Description of your module",
-  "main": "./client/src/boot/index.js",
-  "author": "You",
+  "name": "silverstripe-reoako",
+  "version": "0.1.0",
+  "repository": "https://bitbucket.org/kernldigital/silverstripe-reoako",
+  "private": true,
   "engines": {
-    "node": ">=10.x"
+    "node": "14"
   },
   "scripts": {
-    "build": "yarn && yarn lint && NODE_ENV=production webpack -p --bail --progress",
-    "dev": "NODE_ENV=development webpack --progress",
-    "watch": "NODE_ENV=development webpack --watch --progress",
-    "css": "WEBPACK_CHILD=css npm run build",
-    "test": "jest",
-    "coverage": "jest --coverage",
-    "lock": "npm-shrinkwrap --dev",
-    "lint": "eslint client/src && sass-lint client/src",
-    "lint-js": "eslint client/src",
-    "lint-js-fix": "eslint client/src --fix",
-    "lint-sass": "sass-lint client/src"
+    "watch": "webpack --watch --mode=development",
+    "build": "npm run build:clean && npm run build:check && npm run build:install && npm run build:webpack",
+    "build:check": "check-engines",
+    "build:install": "npm install",
+    "build:clean": "rm -rf wagtail_reoako/static",
+    "build:webpack": "webpack --mode=production"
   },
   "dependencies": {
-    "babel-polyfill": "6.7.4",
-    "react": "^16.8.3"
+    "@octavenz/reoako": "^1.0.1",
+    "prop-types": "^15.6.1",
+    "react": "^16.2.0",
+    "syllable": "^3.0.0"
   },
   "devDependencies": {
-    "@silverstripe/eslint-config": "^0.0.5",
-    "@silverstripe/webpack-config": "^1.0.0",
-    "babel-jest": "^23.6.0",
-    "enzyme": "^3.3.0",
-    "enzyme-adapter-react-16": "^1.10.0",
-    "jest-cli": "^23.6.0"
-  },
-  "babel": {
-    "presets": [
-      "env",
-      "react"
-    ],
-    "plugins": [
-      "transform-object-rest-spread"
-    ]
-  },
-  "jest": {
-    "roots": [
-      "client/src"
-    ],
-    "modulePaths": [
-      "client/src",
-      "../admin/client/src",
-      "../admin/node_modules",
-      "../silverstripe/admin/client/src",
-      "../silverstripe/admin/node_modules",
-      "../../silverstripe/admin/client/src",
-      "../../silverstripe/admin/node_modules"
-    ],
-    "collectCoverageFrom": [
-      "**/*.{js,jsx}",
-      "!**/node_modules/**",
-      "!**/boot/**",
-      "!**/bundles/**",
-      "!**/legacy/**",
-      "!**/vendor/**",
-      "!**/*-test.{js,jsx}",
-      "!**/*-story.{js,jsx}"
-    ],
-    "testMatch": [
-      "**/tests/**/*-test.js?(x)"
-    ],
-    "transform": {
-      ".*": "babel-jest"
-    }
+    "@babel/core": "^7.0.0-beta.41",
+    "@babel/preset-env": "^7.0.0-beta.41",
+    "@babel/preset-react": "^7.0.0-beta.41",
+    "babel-core": "^7.0.0-beta.41",
+    "babel-loader": "^7.1.4",
+    "babel-preset-env": "^1.6.1",
+    "check-engines": "^1.5.0",
+    "css-loader": "^5.2.7",
+    "file-loader": "^5.0.2",
+    "iconfont-plugin-webpack": "^1.1.4",
+    "mini-css-extract-plugin": "^0.8.0",
+    "node-sass": "^4.13.0",
+    "on-build-webpack": "^0.1.0",
+    "sass-loader": "^8.0.0",
+    "style-loader": "^2.0.0",
+    "url-loader": "^3.0.0",
+    "webpack": "^4.19.1",
+    "webpack-cli": "^3.1.1"
   }
 }
