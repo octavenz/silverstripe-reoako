@@ -23,7 +23,7 @@ class ReoakoTinymceExtension extends LeftAndMainExtension
         /** @var TinyMCEConfig $editor */
         $editor = HTMLEditorConfig::get('cwp');
 
-        if (!empty($editor)) {
+        if (empty($editor)) {
             /** @var TinyMCEConfig $editor */
             $editor = HTMLEditorConfig::get('cms');
         }
