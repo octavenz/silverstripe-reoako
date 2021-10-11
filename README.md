@@ -158,21 +158,40 @@ Octavenz\Reoako\Client\ReokakoClient:
   api_key: <KEY>
 ```
 
-## Using the TinyMce plugin
+## Using the TinyMCE plugin
+
+
+When the Reoako plugin is enabled in TinyMCE, you will notice a new Reoako button.
 
 ![Reoako Preview](docs/img/screen0.png)
+
+You can press this button at when text is selected to perform a search a word.
+Searching English or Māori words are supported.
+
+![Reoako Preview](docs/img/screen6.png)
+
+If no text is selected when pressing the Reoako button, you will be prompted to enter a word to search for.
+
 ![Reoako Preview](docs/img/screen1.png)
-![Reoako Preview](docs/img/screen2.png)
+
+When you have found a word you wish to insert, click on its title to insert the Reoako shortcode into the editor
+
 ![Reoako Preview](docs/img/screen3.png)
+
+Reoako shortcodes will be highlighted in the editor
+
 ![Reoako Preview](docs/img/screen4.png)
+
+Currently the text inside a Reoako tag cannot be edited ( this will be fixed in a release shortly ) 
+
 ![Reoako Preview](docs/img/screen5.png)
 
 
 
 
 ### TODO:
+- Ajax search on character entry
 - Subsite support
 - Bitbucket pipeline tests
 - SS4/CWP tests
-- How to use section
 
