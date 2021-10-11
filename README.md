@@ -158,10 +158,21 @@ Octavenz\Reoako\Client\ReokakoClient:
   api_key: <KEY>
 ```
 
+## Using the TinyMce plugin
+
+![Reoako Preview](docs/img/screen0.png)
+![Reoako Preview](docs/img/screen1.png)
+![Reoako Preview](docs/img/screen2.png)
+![Reoako Preview](docs/img/screen3.png)
+![Reoako Preview](docs/img/screen4.png)
+![Reoako Preview](docs/img/screen5.png)
+
+
 
 
 ### TODO:
 - Subsite support
 - Bitbucket pipeline tests
 - SS4/CWP tests
+- How to use section
 
