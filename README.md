@@ -1,4 +1,7 @@
-# [<a src="https://www.reoako.nz/">Reoako</a>]
+# <a src="https://www.reoako.nz/">Reoako</a>
+
+The Reoako silverstripe CMS package helps content managers to embrace the
+use of our national language in Aotearoa. Use te reo Māori correctly, in the right context, and support your readers with word definitions and pronunciation.
 
 ![Reoako Preview](docs/img/screen5.png)
 
@@ -6,31 +9,38 @@
 
 -   Silverstripe 4.X
 -   Composer
--   Reoako API key
+-   Reoako API key - <a src="https://www.reoako.nz/">Register here for more info </a>
+
+### Tested on
+
+-   CWP recipe 2.8
+-   Silverstripe 4.8
+-   PHP 7.4
 
 ## Components
 
-The Reoako silverstripe intergration consists of 4 components.
-
-#### Reoako PHP client
-
-Used to authenticate and request translations from the Reoako API.
+The Reoako silverstripe package consists of 4 components.
+.
 
 #### TinyMCE plugin
 
 Allows content editors to search and insert translations into richfields via TinyMCE.
 
+#### Reoako PHP client
+
+Used to authenticate and make requests to the Reoako API for translations by the TinyMCE plugin
+
 #### Reoako Silverstripe settings tab (optional)
 
 Allows a site admin to set the api key via the settings tab.
 
-If this extension is not enabled you will need to set the API key via yml or .env
+> If this extension is not applied you will need to set the API key via yml or .env - see below
 
 #### Reoako frontend extension (optional)
 
-Enabled by applying an extension to sitetree which will inject the Reoako javascript+css to all frontend views.
+Injects the Reoako javascript and css bundles to all frontend views.
 
-If this extension is not enabled you will need to include the Reaoko frontend package via your own build process
+> If this extension is not applied you will need to include the Reaoko frontend package via your own theme build process
 
 https://www.npmjs.com/package/@octavenz/reoako
 
@@ -38,17 +48,21 @@ https://www.npmjs.com/package/@octavenz/reoako
 
 (While in Beta - please use the private bitbucket link)
 
--   `$ composer config repositories.repo-name vcs https://bitbucket.org/kernldigital/silverstripe-reoako`
+1. `$ composer config repositories.repo-name vcs https://bitbucket.org/kernldigital/silverstripe-reoako.git`
 
--   `$ composer require octavenz/reoako:0.1.0`
+2. `$ composer require octavenz/reoako:dev-feat/init-development`
 
-## Configuration
+3. `dev build and flush`
+
+## Extensions and Configuration
 
 Depending on your setup you will need to apply some extensions
 
-> #### You will need to build and flush after adding the extensions
+To apply the extensions create a config/reoako.yml file in your codebase and copy the following examples into it.
 
-## Required extensions and config
+> You will need to flush after adding the extensions
+
+### Required extensions
 
 #### Shortcode extension
 
@@ -60,19 +74,19 @@ SilverStripe\CMS\Model\SiteTree:
     - Octavenz\Reoako\Extensions\ReoakoShortCodeExtension
 ```
 
-#### Tinymce
+#### Tinymce extension
 
-Adds the Reoako Tinymce plugin to richfields via in the CMS
+Adds the Reoako Tinymce plugin to richfields
 
 ```
 SilverStripe\Admin\LeftAndMain:
-  extra_requirements_javascript:
-    - octavenz/reoako:/dist/js/reoako-tinymce-plugin.js
+  extensions:
+    - Octavenz\Reoako\Extensions\ReoakoTinymceExtension
 ```
 
-#### Tinymce CSS
+#### Tinymce CSS injection
 
-Adds css to the tinyMCE editor window to highlight reoako tags
+Adds css to the TinyMCE editor iframe to allow for highlighting of reoako tags
 
 ```
 SilverStripe\Forms\HTMLEditor\TinyMCEConfig:
@@ -80,13 +94,11 @@ SilverStripe\Forms\HTMLEditor\TinyMCEConfig:
     - "octavenz/reoako:dist/css/editor.css"
 ```
 
-## Optional extensions and config
+## Optional extensions
 
 #### Site config
 
-Apply the site config extension to add a reoako api key field in the site settings
-
-Add the following to your config/site.yml
+Adds a tab and field in thesite config to allow an admin to set the Reoako API key
 
 ```
 SilverStripe\SiteConfig\SiteConfig:
@@ -97,8 +109,6 @@ SilverStripe\SiteConfig\SiteConfig:
 #### Reoako frontend extension
 
 Injects the required Reoako frontend javascript and css to all frontend pages
-
-Add the following to your config/site.yml
 
 ```
 SilverStripe\CMS\Model\SiteTree:
@@ -150,16 +160,16 @@ If no text is selected when pressing the Reoako button, you will be prompted to 
 
 ![Reoako Preview](docs/img/screen1.png)
 
-When you have found a word you wish to insert, click on its title to insert the Reoako shortcode into the editor
-
 ![Reoako Preview](docs/img/screen3.png)
+
+When you have found a word you wish to insert, click on its title to insert the Reoako shortcode into the editor
 
 ![Reoako Preview](docs/img/screen4.png)
 
 ### TODO:
 
 -   Ajax search on character entry
--   API key config from env/yml/field
 -   Subsite support
 -   Bitbucket pipeline tests
 -   SS4/CWP tests
+-   Elemental block support
