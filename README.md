@@ -56,7 +56,7 @@ Depending on your setup you will need to apply some extensions
 
 To apply the extensions create a config/reoako.yml file in your codebase and copy the following examples into it.
 
-> You will need to flush after adding the extensions
+> You will need to run a dev build after adding the extensions
 
 ### Required extensions
 
@@ -94,7 +94,7 @@ SilverStripe\Forms\HTMLEditor\TinyMCEConfig:
 
 #### Site config
 
-Adds a tab and field in thesite config to allow an admin to set the Reoako API key
+Adds a tab and field in the site config to allow an admin to set the Reoako API key
 
 ```
 SilverStripe\SiteConfig\SiteConfig:
@@ -105,6 +105,7 @@ SilverStripe\SiteConfig\SiteConfig:
 #### Reoako frontend extension
 
 Injects the required Reoako frontend javascript and css to all frontend pages
+> Note: requires that the ReoakoSiteConfig be applied as well.
 
 ```
 SilverStripe\CMS\Model\SiteTree:
@@ -168,4 +169,3 @@ When you have found a word you wish to insert, click on its title to insert the 
 -   Subsite support
 -   Bitbucket pipeline tests
 -   SS4/CWP tests
--   Elemental block support
