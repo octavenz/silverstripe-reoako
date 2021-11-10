@@ -22,17 +22,25 @@
                         />
                     </div>
                 </div>
-                <% if $results %>
-                    <% include results results=$results %>
-                <% else_if $search_term %>
+                <% if $error %>
                     <div class="form__field-description">
-                        There are 0 results for "$search_term"
-                    </div>
-               <% else %>
-                    <div class="form__field-description">
-                        Search for a word in Māori or English to continue.
+                        Reoako Error: "$error"
                     </div>
                 <% end_if %>
+                <% if !$error %>
+                    <% if $results %>
+                        <% include results results=$results %>
+                    <% else_if $search_term %>
+                        <div class="form__field-description">
+                            There are 0 results for "$search_term"
+                        </div>
+                    <% else %>
+                        <div class="form__field-description">
+                            Search for a word in Māori or English to continue.
+                        </div>
+                    <% end_if %>
+                <% end_if %>
+
             </fieldset>
         </form>
     </div>
