@@ -105,7 +105,9 @@ SilverStripe\SiteConfig\SiteConfig:
 #### Reoako frontend extension
 
 Injects the required Reoako frontend javascript and css to all frontend pages
-> Note: requires that the ReoakoSiteConfig be applied as well.
+> This extension requires that you also apply the ReoakoSiteConfig extension. If you are compling your own js/css bundle for your frontend, you should not use this extension and instead import the Reoako css and javascript in your build pipeline - see https://www.npmjs.com/package/@octavenz/reoako
+
+
 
 ```
 SilverStripe\CMS\Model\SiteTree:
