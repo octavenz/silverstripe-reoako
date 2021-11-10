@@ -1,4 +1,8 @@
-<h3>There are $count results for "$search_term"</h3>
+<% if $count == 1 %>
+    <h3 class="result-header">There is 1 result for "$search_term"</h3>
+<% else %>
+    <h3 class="result-header">There are $count result for "$search_term"</h3>
+<% end_if %>
 
 <table class="table grid-field__table">
     <thead>
