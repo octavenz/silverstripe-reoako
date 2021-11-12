@@ -9,6 +9,7 @@ use GuzzleHttp\Client;
 use GuzzleHttp\Exception\ServerException;
 use GuzzleHttp\Exception\ClientException;
 use SilverStripe\Control\Director;
+use SilverStripe\View\ArrayData;
 
 class ReoakoClient
 {
@@ -112,12 +113,22 @@ class ReoakoClient
             $response = $error->getResponse();
             // Get the info returned from the remote server.
             $response_info = $response->getBody();
+
+            try {
+                $json = json_decode($response_info);
+                if ($json->message) {
+                    return $json;
+                }
+            } catch (Exception $e) {
+            }
+
             return $response_info;
         } catch (ServerException $error) {
             // Get the original response
             $response = $error->getResponse();
             // Get the info returned from the remote server.
             $response_info = $response->getBody()->getContents();
+
             return $response_info;
         }
     }
