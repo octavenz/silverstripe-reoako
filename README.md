@@ -46,7 +46,7 @@ https://www.npmjs.com/package/@octavenz/reoako
 
 ## Installation
 
-1. `$ composer require octavenz/reoako:0.1.0`
+1. `$ composer require octavenz/reoako:0.1.2`
 
 2. `dev build and flush`
 
