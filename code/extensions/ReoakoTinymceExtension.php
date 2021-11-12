@@ -19,16 +19,11 @@ class ReoakoTinymceExtension extends LeftAndMainExtension
         $reoakoModule = ModuleLoader::inst()->getManifest()->getModule('octavenz/reoako');
 
         // TinyMCE configuration
-        // Get CWP config, if not get CMS config
+        // Get config
         /** @var TinyMCEConfig $editor */
-        $editor = HTMLEditorConfig::get('cwp');
+        $editor = HTMLEditorConfig::get_active();
 
-        if (!empty($editor)) {
-            /** @var TinyMCEConfig $editor */
-            $editor = HTMLEditorConfig::get('cms');
-        }
-
-        // Enable reoako plugin  
+        // Enable reoako plugin
         if ($editor) {
 
             $editor

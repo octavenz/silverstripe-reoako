@@ -43,8 +43,14 @@ class ReoakoController extends Controller
 
                 $results = $rc->search($val);
 
+                if (isset($results['error'])) {
+                    return $this->customise(new ArrayData([
+                        'search_term' => $val,
+                        'error' => $results->error
+                    ]))->renderWith('reoako');
+                }
+
                 if ($request->isAjax()) {
-                    print_r('AJAX');
 
                     $this->customise(new ArrayData([
                         'results' => $results
