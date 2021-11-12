@@ -3,6 +3,12 @@
     type="text/css"
     href="/resources/vendor/silverstripe/admin/client/dist/styles/bundle.css"
 />
+<link
+    rel="stylesheet"
+    type="text/css"
+    href="/resources/vendor/octavenz/reoako/dist/css/modal.css"
+/>
+
 
 <div class="modal-content">
     <div class="asset-admin">
