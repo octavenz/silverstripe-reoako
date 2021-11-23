@@ -1,4 +1,4 @@
-# <a src="https://www.reoako.nz/">Reoako</a>
+# <a href="https://www.reoako.nz/">Reoako</a>
 
 The Reoako silverstripe CMS package helps content managers to embrace the
 use of our national language in Aotearoa. Use te reo Māori correctly, in the right context, and support your readers with word definitions and pronunciation.
@@ -9,7 +9,7 @@ use of our national language in Aotearoa. Use te reo Māori correctly, in the ri
 
 -   Silverstripe 4.X
 -   Composer
--   Reoako API key - <a src="https://www.reoako.nz/">Register here for more info </a>
+-   Reoako API key - <a href="https://www.reoako.nz/">Register here for more info </a>
 
 ### Tested on
 
