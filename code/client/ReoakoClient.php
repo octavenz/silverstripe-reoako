@@ -115,11 +115,11 @@ class ReoakoClient
             $response_info = $response->getBody();
 
             try {
-                $json = json_decode($response_info);
-                if ($json->message) {
+                $json = json_decode($response_info, true);
+                if (isset($json['message'])) {
                     return $json;
                 }
-            } catch (Exception $e) {
+            } catch (\Exception $e) {
             }
 
             return $response_info;
