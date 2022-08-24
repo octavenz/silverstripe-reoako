@@ -104,7 +104,7 @@ import { editorcss } from "./editor.css";
               translation = match["groups"]["translation"];
             }
             if (headword && id && translation) {
-              const tag = ` <reoako class="reoako-tinymce" data-reoako-headword="${headword}" data-reoako-id="${id}" data-reoako-translation="${translation}">${translation}</reoako> `;
+              const tag = ` <reoako class="reoako-tinymce" data-reoako-headword="${headword}" data-reoako-id="${id}" data-reoako-translation="${translation}">${translation}</reoako> &nbsp;`;
               content = content.replace(str, tag);
             }
           }
@@ -131,7 +131,7 @@ import { editorcss } from "./editor.css";
               translation = match["groups"]["translation"];
             }
             if (headword && id && translation) {
-              const tag = ` [reoako data-reoako-headword="${headword}" data-reoako-id="${id}" data-reoako-translation="${translation}"]`;
+              const tag = ` [reoako data-reoako-headword="${headword}" data-reoako-id="${id}" data-reoako-translation="${translation}"] `;
               content = content.replace(str, tag);
             }
           }
