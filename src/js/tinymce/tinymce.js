@@ -131,7 +131,7 @@ import { editorcss } from "./editor.css";
               translation = match["groups"]["translation"];
             }
             if (headword && id && translation) {
-              const tag = ` [reoako data-reoako-headword="${headword}" data-reoako-id="${id}" data-reoako-translation="${translation}"] `;
+              const tag = ` [reoako data-reoako-headword="${headword}" data-reoako-id="${id}" data-reoako-translation="${translation}"]`;
               content = content.replace(str, tag);
             }
           }
