@@ -104,7 +104,7 @@ import { editorcss } from "./editor.css";
               translation = match["groups"]["translation"];
             }
             if (headword && id && translation) {
-              const tag = ` <reoako class="reoako-tinymce" data-reoako-headword="${headword}" data-reoako-id="${id}" data-reoako-translation="${translation}">${translation}</reoako> &nbsp;`;
+              const tag = ` <reoako class="reoako-tinymce" data-reoako-headword="${headword}" data-reoako-id="${id}" data-reoako-translation="${translation}">${translation}</reoako> `;
               content = content.replace(str, tag);
             }
           }
