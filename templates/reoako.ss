@@ -1,4 +1,8 @@
-<% require css('silverstripe/admin:client/dist/styles/bundle.css') %>
+<link
+    rel="stylesheet"
+    type="text/css"
+    href="$resourceURL('silverstripe/admin:client/dist/styles/bundle.css')"
+/>
 
 <div class="modal-content">
     <div class="asset-admin">
