@@ -15,7 +15,7 @@ use of our national language in Aotearoa. Use te reo Māori correctly, in the ri
 
 -   CWP recipe 2.8
 -   Silverstripe 4.8
--   PHP 7.4
+-   PHP 7.4, 8.0
 
 ## Components
 
@@ -46,7 +46,7 @@ https://www.npmjs.com/package/@octavenz/reoako
 
 ## Installation
 
-1. `$ composer require octavenz/reoako:0.1.2`
+1. `$ composer require octavenz/reoako:0.2.0`
 
 2. `dev build and flush`
 
