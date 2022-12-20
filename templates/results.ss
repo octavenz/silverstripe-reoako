@@ -66,7 +66,6 @@
                 translation +
                 '"] ';
 
-            console.log(constructed_shortcode);
             editor.insertContent(constructed_shortcode);
             reoakoInstance.close();
         });
