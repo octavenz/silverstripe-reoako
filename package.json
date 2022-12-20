@@ -1,6 +1,6 @@
 {
   "name": "silverstripe-reoako",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "repository": "https://github.com/octavenz/silverstripe-reoako",
   "private": true,
   "engines": {
@@ -15,7 +15,7 @@
     "build:webpack": "webpack --mode=production"
   },
   "dependencies": {
-    "@octavenz/reoako": "^1.0.1",
+    "@octavenz/reoako": "^1.1.0",
     "prop-types": "^15.6.1",
     "react": "^16.2.0",
     "syllable": "^3.0.0"

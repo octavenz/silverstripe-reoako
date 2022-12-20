@@ -2,7 +2,7 @@
     "name": "octavenz/reoako",
     "description": "A module for Reoako.",
     "type": "silverstripe-vendormodule",
-    "version": "0.1.3",
+    "version": "0.2.0",
     "keywords": [
         "silverstripe",
         "CMS"
@@ -11,7 +11,7 @@
     "require": {
         "silverstripe/framework": "^4.0",
         "silverstripe/admin": "^1.0",
-        "guzzlehttp/guzzle": "^6.5"
+        "guzzlehttp/guzzle": "^7"
     },
     "require-dev": {
         "phpunit/phpunit": "^5.7",
