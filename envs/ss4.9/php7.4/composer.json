@@ -15,7 +15,7 @@
             "type": "path",
             "url": "/var/www/silverstripe-reoako/",
             "options": {
-                "symlink": true
+                "relative": true
             }
         }
     ],

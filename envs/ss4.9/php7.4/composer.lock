@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "2bdc1cdb0da3b15f7f9852982752cede",
+    "content-hash": "df23adeac57b84014bea14437e8f27e2",
     "packages": [
         {
             "name": "bramus/ansi-php",
@@ -5006,7 +5006,7 @@
             "dist": {
                 "type": "path",
                 "url": "/var/www/silverstripe-reoako",
-                "reference": "b94fef64a0f04e6d68abd81ef484f03b9715a32a"
+                "reference": "6e506a18beafe1f7050289ec6488d37069b31352"
             },
             "require": {
                 "guzzlehttp/guzzle": "^7",
@@ -5041,7 +5041,7 @@
                 "silverstripe"
             ],
             "transport-options": {
-                "relative": false
+                "relative": true
             }
         },
         {
