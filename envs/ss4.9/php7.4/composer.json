@@ -13,7 +13,10 @@
     "repositories": [
         {
             "type": "path",
-            "url": "/var/www/silverstripe-reoako/"
+            "url": "/var/www/silverstripe-reoako/",
+            "options": {
+                "symlink": true
+            }
         }
     ],
     "require-dev": {
