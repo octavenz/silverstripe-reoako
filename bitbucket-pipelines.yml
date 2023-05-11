@@ -29,6 +29,7 @@ definitions:
         services:
           - docker
           - mariadb
+        size: 2x # Double resources available for this step.
 
 pipelines:
   default:
