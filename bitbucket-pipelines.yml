@@ -3,7 +3,7 @@ image: octavenz/docker-pipeline-build:latest
 definitions:
   services:
     docker:
-      memory: 7128
+      memory: 5122
     mariadb:
       image: mariadb:focal
       environment:
