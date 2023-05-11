@@ -4,6 +4,9 @@ definitions:
   services:
     docker:
       memory: 5122
+      environment:
+        DOCKER_BUILDKIT: 0
+
     mariadb:
       image: mariadb:focal
       environment:
