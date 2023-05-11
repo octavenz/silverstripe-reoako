@@ -4,12 +4,13 @@ definitions:
   services:
     docker:
       memory: 7128
-    postgres:
+    mariadb:
       image: mariadb:focal
       environment:
         MARIADB_USER: ss
         MARIADB_PASSWORD: ss
         MARIADB_DATABASE: silverstripe
+        MARIADB_ALLOW_EMPTY_ROOT_PASSWORD: 'yes'
 
   steps:
     - step: &testSS4.9_PHP7.4
@@ -24,7 +25,7 @@ definitions:
           - wget http://localhost
 
         services:
-          - postgres
+          - mariadb
 
 pipelines:
   default:
