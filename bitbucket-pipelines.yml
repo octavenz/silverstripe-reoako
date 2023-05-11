@@ -17,7 +17,9 @@ definitions:
         name: Test Silverstripe 4.9 - PHP 7.4
         script:
           - cd envs/ss4.9/php7.4
+          - cp .env.example .env
           - echo 'SS_REOAKO_API_KEY="$SS_REOAKO_API_KEY"' >> .env
+          - cat ./.env
           - docker compose up -d
           - sleep 2
           - wget http://localhost/dev/build
@@ -25,6 +27,7 @@ definitions:
           - wget http://localhost
 
         services:
+          - docker
           - mariadb
 
 pipelines:
@@ -32,6 +35,6 @@ pipelines:
     # testing should occur on all branches so we can deal with test failures
     # before pushing code to more important branches like develop or master.
     - parallel:
-        - step: *testSS4.9_PHP7.4
-        # - step: *testFrontend
+      - step: *testSS4.9_PHP7.4
+      # - step: *testFrontend
 
