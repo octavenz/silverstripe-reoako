@@ -9,6 +9,19 @@ import { editorcss } from "./editor.css";
     }
 
     tinymce.PluginManager.add("reoakotranslationdialog", function (editor) {
+
+      editor.on('click', function(){
+
+          const mceSelection = editor.selection;
+          const currentNode = $(mceSelection.getEnd());
+
+          if (currentNode?.context?.nodeName === "REOAKO"){
+            const targetNode = currentNode.closest("reoako");
+            mceSelection.select(targetNode.get(0));
+          }
+
+      });
+
       function showDialog() {
         var url,
           urlParams,
@@ -104,7 +117,7 @@ import { editorcss } from "./editor.css";
               translation = match["groups"]["translation"];
             }
             if (headword && id && translation) {
-              const tag = ` <reoako class="reoako-tinymce" data-reoako-headword="${headword}" data-reoako-id="${id}" data-reoako-translation="${translation}">${translation}</reoako> &nbsp;`;
+              const tag = `<reoako class="reoako-tinymce" data-reoako-headword="${headword}" data-reoako-id="${id}" data-reoako-translation="${translation}">${translation}</reoako>`;
               content = content.replace(str, tag);
             }
           }
@@ -131,7 +144,7 @@ import { editorcss } from "./editor.css";
               translation = match["groups"]["translation"];
             }
             if (headword && id && translation) {
-              const tag = ` [reoako data-reoako-headword="${headword}" data-reoako-id="${id}" data-reoako-translation="${translation}"] `;
+              const tag = `[reoako data-reoako-headword="${headword}" data-reoako-id="${id}" data-reoako-translation="${translation}"]`;
               content = content.replace(str, tag);
             }
           }
@@ -152,9 +165,6 @@ import { editorcss } from "./editor.css";
           event.content = restoreShortcodes(event.content);
         }
       });
-
-      //   // [reoako headword="September" id="mahuru" translation="Mahuru"]
-      //   // <span data-reoako-headword="September" data-reoako-id="mahuru" data-reoako-translation="Mahuru" class="reoako-trigger" tabindex="0" role="button" title="Show translation" aria-label="Show translation" lang="mi">
     });
   })(jQuery);
 }.call(this));
