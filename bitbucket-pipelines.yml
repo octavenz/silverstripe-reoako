@@ -7,9 +7,10 @@ definitions:
     postgres:
       image: mariadb:focal
       environment:
-        POSTGRES_DB: silverstripe
-        POSTGRES_USER: ss
-        POSTGRES_PASSWORD: ss
+        MARIADB_USER: ss
+        MARIADB_PASSWORD: ss
+        MARIADB_ALLOW_EMPTY_ROOT_PASSWORD: yes
+        MARIADB_DATABASE: silverstripe
 
   steps:
     - step: &testSS4.9_PHP7.4
