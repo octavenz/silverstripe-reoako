@@ -19,7 +19,7 @@ definitions:
         script:
           - cd envs/ss4.9/php7.4
           - cp .env.example .env
-          - echo 'SS_REOAKO_API_KEY="$SS_REOAKO_API_KEY"' >> .env
+          - echo 'SS_REOAKO_API_KEY="${SS_REOAKO_API_KEY}"' >> .env
           - cat ./.env
           - DOCKER_BUILDKIT=0 docker compose --profile "development" up -d
           - sleep 2
