@@ -20,7 +20,7 @@ definitions:
           - cp .env.example .env
           - echo 'SS_REOAKO_API_KEY="$SS_REOAKO_API_KEY"' >> .env
           - cat ./.env
-          - docker compose up --profile "development" -d
+          - docker compose --profile "development" up -d
           - sleep 2
           - wget http://localhost/dev/build
           - sleep 10
