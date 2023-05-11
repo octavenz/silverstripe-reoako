@@ -1,0 +1,36 @@
+image: octavenz/docker-pipeline-build:latest
+
+definitions:
+  services:
+    docker:
+      memory: 7128
+    postgres:
+      image: mariadb:focal
+      environment:
+        POSTGRES_DB: silverstripe
+        POSTGRES_USER: ss
+        POSTGRES_PASSWORD: ss
+
+  steps:
+    - step: &testSS4.9_PHP7.4
+        name: Test Silverstripe 4.9 - PHP 7.4
+        script:
+          - cd envs/ss4.9/php7.4
+          - echo 'SS_REOAKO_API_KEY="$SS_REOAKO_API_KEY"' >> .env
+          - docker compose up -d
+          - sleep 2
+          - wget http://localhost/dev/build
+          - sleep 10
+          - wget http://localhost
+
+        services:
+          - postgres
+
+pipelines:
+  default:
+    # testing should occur on all branches so we can deal with test failures
+    # before pushing code to more important branches like develop or master.
+    - parallel:
+        - step: *testSS4.9_PHP7.4
+        # - step: *testFrontend
+

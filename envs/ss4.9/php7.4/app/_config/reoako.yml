@@ -1,0 +1,21 @@
+# Adds the Reokako Settings Tab and API key input
+SilverStripe\SiteConfig\SiteConfig:
+  extensions:
+    - Octavenz\Reoako\Extensions\ReoakoSiteConfig
+
+# Adds the Reoako Tinymce plugin
+SilverStripe\Admin\LeftAndMain:
+  extensions:
+    - Octavenz\Reoako\Extensions\ReoakoTinymceExtension
+
+SilverStripe\CMS\Model\SiteTree:
+  extensions:
+    # Adds the Reoako Shortcode parser for use in content fields
+    - Octavenz\Reoako\Extensions\ReoakoShortCodeExtension
+    # Injects the frontend javascript Reoako lib
+    - Octavenz\Reoako\Extensions\ReoakoFrontendExtension
+
+SilverStripe\Forms\HTMLEditor\TinyMCEConfig:
+  editor_css:
+    - "octavenz/reoako:dist/css/editor.css"
+

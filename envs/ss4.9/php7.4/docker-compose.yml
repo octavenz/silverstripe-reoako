@@ -1,0 +1,61 @@
+version: "3.8"
+services:
+  silverstripe:
+    profiles:
+      - "development"
+    build:
+      context: .
+      dockerfile: docker/Dockerfile
+      target: app-dev
+    volumes:
+      - .:/var/www/html
+      - ../../../.:/var/www/silverstripe-reoako/
+      - envs:/var/www/silverstripe-reoako/envs
+    depends_on:
+      - database
+    environment:
+      - DOCUMENT_ROOT=/var/www/html/public
+    env_file:
+      - .env
+    ports:
+      - 80:80
+    user: "1000:1000"
+
+  database:
+    profiles:
+      - "development"
+    image: mariadb:focal
+    environment:
+      - MARIADB_USER=ss
+      - MARIADB_PASSWORD=ss
+      - MARIADB_ALLOW_EMPTY_ROOT_PASSWORD=yes
+      - MARIADB_DATABASE=silverstripe
+    env_file:
+      - .env
+    volumes:
+      - db:/var/lib/mysql
+    ports:
+      - 3306:3306
+
+  composer:
+    tty: true
+    stdin_open: true
+    command: bash
+    profiles:
+      - "composer"
+    build:
+      context: .
+      dockerfile: docker/Dockerfile
+      target: base
+    volumes:
+      - .:/var/www/html
+      - ../../../.:/var/www/silverstripe-reoako/
+    environment:
+      - DOCUMENT_ROOT=/var/www/html/public
+    env_file:
+      - .env
+    user: "1000:1000"
+
+volumes:
+  db:
+  envs:
