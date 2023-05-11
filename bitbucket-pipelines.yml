@@ -4,8 +4,6 @@ definitions:
   services:
     docker:
       memory: 5122
-      environment:
-        DOCKER_BUILDKIT: 0
 
     mariadb:
       image: mariadb:focal
@@ -23,7 +21,7 @@ definitions:
           - cp .env.example .env
           - echo 'SS_REOAKO_API_KEY="$SS_REOAKO_API_KEY"' >> .env
           - cat ./.env
-          - docker compose --profile "development" up -d
+          - DOCKER_BUILDKIT=0 docker compose --profile "development" up -d
           - sleep 2
           - wget http://localhost/dev/build
           - sleep 10
