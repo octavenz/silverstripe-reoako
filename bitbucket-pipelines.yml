@@ -17,7 +17,7 @@ definitions:
         name: Test Silverstripe 4.9 - PHP 7.4
         script:
           - cd envs/ss4.9/php7.4
-          - echo 'SS_REOAKO_API_KEY="$SS_REOAKO_API_KEY"'' >> .env
+          - echo 'SS_REOAKO_API_KEY="$SS_REOAKO_API_KEY"' >> .env
           - docker compose up -d
           - sleep 2
           - wget http://localhost/dev/build
