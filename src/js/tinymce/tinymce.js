@@ -125,6 +125,53 @@ import { editorcss } from "./editor.css";
         return content;
       }
 
+      editor.on("KeyUp", function(ed, e){
+        const evt = e || window.event;
+        var charCode = evt.keyCode || evt.which;
+        const currentNode = $(editor.selection.getEnd());
+        const insideReoako = currentNode?.context?.nodeName === 'REOAKO';
+
+        // 8 = backspace
+        // 32 = space
+        // 37 = left arrow
+        // 39 = right arrow
+        // 38 = up arrow
+        // 40 = down arrow
+        // 46 = delete
+
+        // Ignore up or down
+        if( [38, 40].includes(charCode)){
+          return;
+        }
+
+        // auto select reoako word
+        if(insideReoako && [37, 39].includes(charCode)){
+          if(currentNode !== currentNode.closest("reoako")){
+            const targetNode = currentNode.closest("reoako");
+            const cursorPos = editor.selection.getRng().startOffset;
+            const targetLength = currentNode?.context?.innerText.length;
+
+            if(cursorPos !== targetLength){
+              editor.selection.select(targetNode.get(0));
+              evt.preventDefault();
+              return;
+            }
+          }
+        }
+
+        // Delete the tag if you are inside it and press delete or backspace
+        if(charCode === 8 && insideReoako || charCode === 46 && insideReoako){
+          editor.execCommand('insertContent', true, ' ');
+          currentNode.remove();
+          evt.preventDefault();
+          return;
+        }
+
+        if( ![37, 39].includes(charCode) && insideReoako){
+          evt.preventDefault();
+          return;
+        }
+    })
       function restoreShortcodes(content) {
         const matches = [...content.matchAll(reoako_regex)];
 
@@ -165,6 +212,7 @@ import { editorcss } from "./editor.css";
           event.content = restoreShortcodes(event.content);
         }
       });
+
     });
   })(jQuery);
 }.call(this));

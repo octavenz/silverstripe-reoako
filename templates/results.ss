@@ -61,7 +61,8 @@
                 id +
                 '" data-reoako-translation="' +
                 translation +
-                '"]&nbsp;';
+                '"]';
+
             editor.insertContent(constructed_shortcode);
             reoakoInstance.close();
         });
@@ -71,9 +72,5 @@
             reoakoInstance.close();
         });
 
-        // Auto refresh TODO: (replace with ajax)
-        $("#Form_reoakoInput", document).keyup(() => {
-            $("#Form_reoakoForm", document).trigger("submit");
-        });
     }
 </script>
