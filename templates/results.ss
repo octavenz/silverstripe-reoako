@@ -44,6 +44,11 @@
 
     if (reoakoInstance) {
         var editor = reoakoInstance.features.editor;
+        var initialSelection = editor.selection;
+        var range = editor.selection.getRng();
+        var nothingSelected = range.startOffset === range.endOffset;
+        var selectedText = range.startContainer.data.substring(range.startOffset, range.endOffset);
+        var isAtEndOfSelection = range.startContainer.data.length === range.endOffset;
 
         $(".choose-word", document).on("click", (e) => {
             var translation = e.currentTarget.getAttribute(
@@ -63,6 +68,9 @@
                 translation +
                 '"]';
 
+            if(isAtEndOfSelection){
+                constructed_shortcode += '&nbsp;';
+            }
             editor.insertContent(constructed_shortcode);
             reoakoInstance.close();
         });
