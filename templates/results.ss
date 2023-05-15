@@ -1,7 +1,7 @@
 <% if $count == 1 %>
-    <h3 class="result-header">There is 1 result for "$search_term"</h3>
+    <h3 class="result-header form__field-description" style="padding-top: 4px;">There is 1 result for "$search_term"</h3>
 <% else %>
-    <h3 class="result-header">There are $count result for "$search_term"</h3>
+    <h3 class="result-header form__field-description" style="padding-top: 4px;">There are $count results for "$search_term"</h3>
 <% end_if %>
 
 <table class="table grid-field__table">
@@ -44,10 +44,13 @@
 
     if (reoakoInstance) {
         var editor = reoakoInstance.features.editor;
+        var initialSelection = editor.selection;
+        var range = editor.selection.getRng();
+        var nothingSelected = range.startOffset === range.endOffset;
+        var selectedText = range.startContainer.data.substring(range.startOffset, range.endOffset);
+        var isAtEndOfSelection = range.startContainer.data.length === range.endOffset;
 
         $(".choose-word", document).on("click", (e) => {
-            // console.log(e.currentTarget);
-
             var translation = e.currentTarget.getAttribute(
                 "data-reoako-translation"
             );
@@ -55,17 +58,19 @@
             var headword = e.currentTarget.getAttribute("data-reoako-headword");
             var word = e.currentTarget.getAttribute("data-reoako-translation");
 
-            console.log([translation, id, headword, word]);
 
             let constructed_shortcode =
-                ' [reoako data-reoako-headword="' +
+                '[reoako data-reoako-headword="' +
                 headword +
                 '" data-reoako-id="' +
                 id +
                 '" data-reoako-translation="' +
                 translation +
-                '"] ';
+                '"]';
 
+            if(isAtEndOfSelection){
+                constructed_shortcode += '&nbsp;';
+            }
             editor.insertContent(constructed_shortcode);
             reoakoInstance.close();
         });
@@ -75,9 +80,5 @@
             reoakoInstance.close();
         });
 
-        // Auto refresh TODO: (replace with ajax)
-        $("#Form_reoakoInput", document).keyup(() => {
-            $("#Form_reoakoForm", document).trigger("submit");
-        });
     }
 </script>

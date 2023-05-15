@@ -13,13 +13,20 @@
                     class="field text insert-embed-reoako form-group"
                 >
                     <div class="form__field-holder">
+                        <label style="min-width: 50%">
+                            <input
+                                id="Form_reoakoInput"
+                                name="search_term"
+                                type="text"
+                                class="text insert-embed-reoako form-control"
+                                value="$search_term"
+                            >
+                        </label>
                         <input
-                            id="Form_reoakoInput"
-                            name="search_term"
-                            type="text"
-                            class="text insert-embed-reoako form-control"
-                            value="$search_term"
-                        />
+                            type="submit"
+                            value="Search"
+                            class="btn btn-primary"
+                        >
                     </div>
                 </div>
                 <% if $error %>
