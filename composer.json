@@ -2,7 +2,7 @@
     "name": "octavenz/reoako",
     "description": "A module for Reoako.",
     "type": "silverstripe-vendormodule",
-    "version": "0.2.2",
+    "version": "0.2.2.0-alpha",
     "keywords": [
         "silverstripe",
         "CMS"

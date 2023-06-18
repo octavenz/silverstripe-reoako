@@ -1,6 +1,6 @@
 {
   "name": "silverstripe-reoako",
-  "version": "0.2.2",
+  "version": "0.2.2.0-alpha",
   "repository": "https://github.com/octavenz/silverstripe-reoako",
   "private": true,
   "engines": {
