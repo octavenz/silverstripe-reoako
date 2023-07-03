@@ -37,6 +37,7 @@
           currentText;
         currentText = "";
 
+
         mceSelection = editor.selection;
         $currentNode = $(mceSelection.getEnd());
         // target selected embed (if any)
@@ -44,6 +45,7 @@
 
         if ($targetNode.length) {
           currentText = $targetNode.text();
+
           if ($targetNode.children().length === 0) {
             // select and replace text-only target
             insertElement = function (elem) {
@@ -62,10 +64,16 @@
           if (!mceSelection.isCollapsed()) {
             currentText = mceSelection.getContent({ format: "text" });
           }
+
           // replace current selection
           insertElement = function (elem) {
             mceSelection.setNode(elem);
           };
+        }
+
+        var sel = editor.selection.getSel();
+        if(sel.baseNode.nodeName === '#text') {
+          currentText = sel.baseNode.data.substring(sel.anchorOffset, sel.extentOffset);
         }
 
         url = "/reoako-modal/search?search_term=" + currentText;

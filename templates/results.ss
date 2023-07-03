@@ -44,21 +44,10 @@
     var dialog = window.parent._activeDialog;
 
     if (editor) {
-        console.log(editor);
         var initialSelection = editor.selection;
         var range = editor.selection.getRng();
         var nothingSelected = range.startOffset === range.endOffset;
-        var selectedText = range.startContainer.data.substring(range.startOffset, range.endOffset);
-        var isAtEndOfSelection = range.startContainer.data.length === range.endOffset;
-
-
-        var sel = tinymce.activeEditor.selection.getSel();
-        if(sel.baseNode.nodeName === '#text') {
-          currentText = sel.baseNode.data.substring(sel.anchorOffset, sel.extentOffset);
-          console.log(currentText);
-        }
-
-
+        var isAtEndOfSelection = range?.startContainer?.innerText?.length === range.endOffset;
 
         $(".choose-word", document).on("click", (e) => {
             var translation = e.currentTarget.getAttribute(
