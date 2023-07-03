@@ -40,15 +40,25 @@
 <script type="text/javascript">
     //Hacky iframe parent JQuery js
     var $ = window.parent.jQuery;
-    var reoakoInstance = window.parent._reoako;
+    var editor = window.parent._activeEditor;
+    var dialog = window.parent._activeDialog;
 
-    if (reoakoInstance) {
-        var editor = reoakoInstance.features.editor;
+    if (editor) {
+        console.log(editor);
         var initialSelection = editor.selection;
         var range = editor.selection.getRng();
         var nothingSelected = range.startOffset === range.endOffset;
         var selectedText = range.startContainer.data.substring(range.startOffset, range.endOffset);
         var isAtEndOfSelection = range.startContainer.data.length === range.endOffset;
+
+
+        var sel = tinymce.activeEditor.selection.getSel();
+        if(sel.baseNode.nodeName === '#text') {
+          currentText = sel.baseNode.data.substring(sel.anchorOffset, sel.extentOffset);
+          console.log(currentText);
+        }
+
+
 
         $(".choose-word", document).on("click", (e) => {
             var translation = e.currentTarget.getAttribute(
@@ -72,12 +82,12 @@
                 constructed_shortcode += '&nbsp;';
             }
             editor.insertContent(constructed_shortcode);
-            reoakoInstance.close();
+            dialog.close();
         });
 
         // Close window
         $(".close", document).on("click", (e) => {
-            reoakoInstance.close();
+            dialog.close();
         });
 
     }
