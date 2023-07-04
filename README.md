@@ -5,17 +5,18 @@ use of our national language in Aotearoa. Use te reo Māori correctly, in the ri
 
 ![Reoako Preview](docs/img/screen5.png)
 
+### Releases and tags
+Version 0.X releases are for Silverstripe 4
+Version 1.X releases are for Silverstripe 5
+
 ## Requirements
 
--   Silverstripe 4.X
+-   Silverstripe 5.X
 -   Composer
 -   Reoako API key - <a href="https://www.reoako.nz/">Register here for more info </a>
 
 ### Tested on
-
--   CWP recipe 2.8
--   Silverstripe 4.8
--   PHP 7.4, 8.0
+-   PHP 8.2
 
 ## Components
 
