@@ -28,12 +28,12 @@ class ReoakoTinymceExtension extends LeftAndMainExtension
 
             $editor
                 ->enablePlugins([
-                    'reoakotranslationdialog' => $reoakoModule
+                    'reoako' => $reoakoModule
                         ->getResource('/dist/js/reoako-tinymce-plugin.js')
                 ]);
             $editor->addButtonsToLine(
                 2,
-                'reoakotranslationdialog'
+                'reoako-button'
             );
         }
 

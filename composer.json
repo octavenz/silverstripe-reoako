@@ -2,15 +2,14 @@
     "name": "octavenz/reoako",
     "description": "A module for Reoako.",
     "type": "silverstripe-vendormodule",
-    "version": "0.2.3",
+    "version": "1.0.1",
     "keywords": [
         "silverstripe",
         "CMS"
     ],
     "license": "BSD-3-Clause",
     "require": {
-        "silverstripe/framework": "^4.0",
-        "silverstripe/admin": "^1.0",
+        "silverstripe/framework": "^5.0",
         "guzzlehttp/guzzle": "^7"
     },
     "require-dev": {

@@ -40,15 +40,14 @@
 <script type="text/javascript">
     //Hacky iframe parent JQuery js
     var $ = window.parent.jQuery;
-    var reoakoInstance = window.parent._reoako;
+    var editor = window.parent._activeEditor;
+    var dialog = window.parent._activeDialog;
 
-    if (reoakoInstance) {
-        var editor = reoakoInstance.features.editor;
+    if (editor) {
         var initialSelection = editor.selection;
         var range = editor.selection.getRng();
         var nothingSelected = range.startOffset === range.endOffset;
-        var selectedText = range.startContainer.data.substring(range.startOffset, range.endOffset);
-        var isAtEndOfSelection = range.startContainer.data.length === range.endOffset;
+        var isAtEndOfSelection = range?.startContainer?.innerText?.length === range.endOffset;
 
         $(".choose-word", document).on("click", (e) => {
             var translation = e.currentTarget.getAttribute(
@@ -74,12 +73,12 @@
                 constructed_shortcode += '&nbsp;';
             }
             editor.insertContent(constructed_shortcode);
-            reoakoInstance.close();
+            dialog.close();
         });
 
         // Close window
         $(".close", document).on("click", (e) => {
-            reoakoInstance.close();
+            dialog.close();
         });
 
     }

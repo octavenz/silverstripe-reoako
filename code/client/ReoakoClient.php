@@ -20,6 +20,12 @@ class ReoakoClient
      * @config
      */
     private static $default_api_domain = 'https://api.reoako.nz';
+
+    public function getDefaultApiDomain()
+    {
+        return self::$default_api_domain;
+    }
+
     /**
      *  API base path
      *
@@ -27,6 +33,11 @@ class ReoakoClient
      * @config
      */
     private static $default_api_base_path = 'api/v1';
+    public function getDefaultApiBasePath()
+    {
+        return self::$default_api_base_path;
+    }
+
 
     /**
      *  API key
@@ -76,13 +87,14 @@ class ReoakoClient
         return '';
     }
 
+    private string $endpoint;
+    private string $origin;
 
     public function __construct()
     {
         $this->apiKey = $this->getApiKey();
-        $this->domain = self::$default_api_domain;
         $this->origin = Director::protocolAndHost();
-        $this->endpoint = $this->domain . '/' . self::$default_api_base_path;
+        $this->endpoint = $this->getDefaultApiDomain() . '/' . $this->getDefaultApiBasePath();
     }
 
     function search($term)
