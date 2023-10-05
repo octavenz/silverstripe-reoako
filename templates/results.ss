@@ -54,9 +54,11 @@
                 "data-reoako-translation"
             );
             var id = e.currentTarget.getAttribute("data-reoako-id");
-            var headword = e.currentTarget.getAttribute("data-reoako-headword");
-            var word = e.currentTarget.getAttribute("data-reoako-translation");
-
+            var headword = document.getElementById('Form_reoakoInput').value;
+            var firstChar = headword.charAt(0);
+            if (firstChar == firstChar.toUpperCase()) {
+                translation = translation.charAt(0).toUpperCase() + translation.slice(1);
+            }
 
             let constructed_shortcode =
                 '[reoako data-reoako-headword="' +

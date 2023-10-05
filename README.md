@@ -6,10 +6,13 @@ use of our national language in Aotearoa. Use te reo Māori correctly, in the ri
 ![Reoako Preview](docs/img/screen5.png)
 
 ## Requirements
+> NOTE: Please use the 1.x.x tag for Silverstripe 5 support
 
 -   Silverstripe 4.X
 -   Composer
 -   Reoako API key - <a href="https://www.reoako.nz/">Register here for more info </a>
+
+
 
 ### Tested on
 
@@ -46,7 +49,7 @@ https://www.npmjs.com/package/@octavenz/reoako
 
 ## Installation
 
-1. `$ composer require octavenz/reoako:0.2.0`
+1. `$ composer require octavenz/reoako:0.3.0`
 
 2. `dev build and flush`
 
